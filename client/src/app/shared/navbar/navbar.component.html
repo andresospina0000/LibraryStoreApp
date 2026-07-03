@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" routerLink="/store">
+      📚 Library Store
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNav"
+      aria-controls="mainNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/store" routerLinkActive="active fw-semibold">Store</a>
+        </li>
+
+        @if (auth.isAdmin()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/manage/books" routerLinkActive="active fw-semibold">
+              Manage Books
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/manage/authors" routerLinkActive="active fw-semibold">
+              Manage Authors
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/manage/myself" routerLinkActive="active fw-semibold">
+              My Account
+            </a>
+          </li>
+        }
+      </ul>
+
+      <ul class="navbar-nav">
+        @if (auth.isLoggedIn()) {
+          <li class="nav-item d-flex align-items-center me-3 text-muted small">
+            Hi, {{ auth.user()?.fullName }}
+            <span class="badge bg-primary-subtle text-primary-emphasis ms-2">
+              {{ auth.user()?.role }}
+            </span>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-secondary btn-sm" (click)="logout()">Sign out</button>
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a class="btn btn-primary btn-sm" routerLink="/login">Admin sign in</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

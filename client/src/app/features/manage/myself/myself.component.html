@@ -1,0 +1,40 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h1 class="h3 mb-4">My Account</h1>
+
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+          <h2 class="h6 text-muted mb-3">Profile</h2>
+          <p class="mb-1"><strong>Name:</strong> {{ auth.user()?.fullName }}</p>
+          <p class="mb-1"><strong>Email:</strong> {{ auth.user()?.email }}</p>
+          <p class="mb-0"><strong>Role:</strong> {{ auth.user()?.role }}</p>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-0">
+        <div class="card-body">
+          <h2 class="h6 text-muted mb-3">Change password</h2>
+          <form (ngSubmit)="submit()">
+            <div class="mb-3">
+              <label class="form-label">Current password</label>
+              <input type="password" class="form-control" [(ngModel)]="currentPassword" name="currentPassword" autocomplete="current-password" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">New password</label>
+              <input type="password" class="form-control" [(ngModel)]="newPassword" name="newPassword" autocomplete="new-password" required />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Confirm new password</label>
+              <input type="password" class="form-control" [(ngModel)]="confirmPassword" name="confirmPassword" autocomplete="new-password" required />
+            </div>
+            <button class="btn btn-primary" type="submit" [disabled]="saving()">
+              @if (saving()) { <span class="spinner-border spinner-border-sm me-2"></span> }
+              Update password
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

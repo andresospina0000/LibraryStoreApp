@@ -1,0 +1,21 @@
+/* Bootstrap (light theme) */
+@import 'bootstrap/scss/bootstrap';
+
+/* Global light theme tweaks */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.object-fit-contain {
+  object-fit: contain;
+}
+
+.card {
+  transition: box-shadow 0.15s ease-in-out;
+}
