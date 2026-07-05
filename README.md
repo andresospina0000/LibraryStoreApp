@@ -2,7 +2,10 @@
 
 A full-stack library store: **.NET 8 Web API** (clean architecture) + **Angular 18 SPA** (Bootstrap light theme).
 
-Non-registered users can browse books for sale. Admins can sign in to manage books, authors and their own password. A book can be linked to N authors.
+### User Story
+
+You will build an application that will manage a library, meaning this application will allow a user to fetch, create, update and delete books that will be available for selling. So, I want the web app to display a list of available products (if I'm not a admin user and I have not logged in into the app). So, non-registered users will be able to only fetch a list of products (something like Amazon). On the other hand, an admin user will be able to manage books, meaning that this user can update things like the name of a book, its price, a discount amount, description, author, publication date and an image of the book's cover. Also, this admin user can create new books and after saving they will be available for non-registered users as read only. The admin can also delete books if needed.
+A book can be linked to several authors so the admin user can also create, update and delete authors so one book can be linked to N-authors.
 
 ## Solution structure
 
