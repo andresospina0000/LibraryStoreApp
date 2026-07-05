@@ -6,11 +6,9 @@ using Library.Domain.Entities;
 
 namespace Library.Application.Services;
 
-public class AuthorService : IAuthorService
+public class AuthorService(IAuthorRepository authors) : IAuthorService
 {
-    private readonly IAuthorRepository _authors;
-
-    public AuthorService(IAuthorRepository authors) => _authors = authors;
+    private readonly IAuthorRepository _authors = authors;
 
     public async Task<Result<IReadOnlyList<AuthorDto>>> GetAllAsync(CancellationToken ct = default)
     {

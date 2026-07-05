@@ -1,11 +1,9 @@
 namespace Library.Application.Common;
 
 /// <summary>Base type for expected, mappable application errors.</summary>
-public abstract class AppException : Exception
+public abstract class AppException(string message) : Exception(message)
 {
     public abstract ErrorType ErrorType { get; }
-
-    protected AppException(string message) : base(message) { }
 }
 
 public class NotFoundException : AppException
@@ -15,26 +13,22 @@ public class NotFoundException : AppException
     public NotFoundException(string entity, Guid id) : base($"{entity} with id '{id}' was not found.") { }
 }
 
-public class ValidationException : AppException
+public class ValidationException(string message) : AppException(message)
 {
     public override ErrorType ErrorType => ErrorType.Validation;
-    public ValidationException(string message) : base(message) { }
 }
 
-public class ConflictException : AppException
+public class ConflictException(string message) : AppException(message)
 {
     public override ErrorType ErrorType => ErrorType.Conflict;
-    public ConflictException(string message) : base(message) { }
 }
 
-public class NotCreatedException : AppException
+public class NotCreatedException(string message) : AppException(message)
 {
     public override ErrorType ErrorType => ErrorType.NotCreated;
-    public NotCreatedException(string message) : base(message) { }
 }
 
-public class UnauthorizedException : AppException
+public class UnauthorizedException(string message) : AppException(message)
 {
     public override ErrorType ErrorType => ErrorType.Unauthorized;
-    public UnauthorizedException(string message) : base(message) { }
 }

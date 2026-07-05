@@ -8,21 +8,14 @@ using Library.Domain.Enums;
 
 namespace Library.Application.Services;
 
-public class UserService : IUserService
+public class UserService(IUserRepository users, IPasswordHasher hasher, IJwtTokenGenerator jwt) : IUserService
 {
     private static readonly Regex EmailRegex =
         new(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
 
-    private readonly IUserRepository _users;
-    private readonly IPasswordHasher _hasher;
-    private readonly IJwtTokenGenerator _jwt;
-
-    public UserService(IUserRepository users, IPasswordHasher hasher, IJwtTokenGenerator jwt)
-    {
-        _users = users;
-        _hasher = hasher;
-        _jwt = jwt;
-    }
+    private readonly IUserRepository _users = users;
+    private readonly IPasswordHasher _hasher = hasher;
+    private readonly IJwtTokenGenerator _jwt = jwt;
 
     public async Task<Result<AuthResultDto>> LoginAsync(LoginDto dto, CancellationToken ct = default)
     {

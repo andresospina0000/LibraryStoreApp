@@ -4,11 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infrastructure.Persistence.Repositories;
 
-public class AuthorRepository : IAuthorRepository
+public class AuthorRepository(LibraryDbContext db) : IAuthorRepository
 {
-    private readonly LibraryDbContext _db;
-
-    public AuthorRepository(LibraryDbContext db) => _db = db;
+    private readonly LibraryDbContext _db = db;
 
     public async Task<IReadOnlyList<Author>> GetAllAsync(CancellationToken ct = default) =>
         await _db.Authors

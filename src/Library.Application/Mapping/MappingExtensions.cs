@@ -14,10 +14,9 @@ public static class MappingExtensions
         FinalPrice: Math.Max(0, book.Price - book.Discount),
         book.PublicationDate,
         book.ImageUrl,
-        book.Authors
+        [.. book.Authors
             .OrderBy(a => a.LastName)
-            .Select(a => new BookAuthorDto(a.Id, a.FirstName, a.LastName))
-            .ToList());
+            .Select(a => new BookAuthorDto(a.Id, a.FirstName, a.LastName))]);
 
     public static AuthorDto ToDto(this Author author) => new(
         author.Id,

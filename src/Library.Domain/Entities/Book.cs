@@ -27,5 +27,5 @@ public class Book
     public DateTime? UpdatedAtUtc { get; set; }
 
     // Navigation
-    public ICollection<Author> Authors { get; set; } = new List<Author>();
+    public ICollection<Author> Authors { get; set; } = [];
 }

@@ -6,11 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.API.Controllers;
 
-public class UsersController : ApiControllerBase
+public class UsersController(IUserService users) : ApiControllerBase
 {
-    private readonly IUserService _users;
-
-    public UsersController(IUserService users) => _users = users;
+    private readonly IUserService _users = users;
 
     /// <summary>Public: authenticate and receive a JWT.</summary>
     [HttpPost("login")]

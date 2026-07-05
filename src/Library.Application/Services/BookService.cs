@@ -6,16 +6,10 @@ using Library.Domain.Entities;
 
 namespace Library.Application.Services;
 
-public class BookService : IBookService
+public class BookService(IBookRepository books, IAuthorRepository authors) : IBookService
 {
-    private readonly IBookRepository _books;
-    private readonly IAuthorRepository _authors;
-
-    public BookService(IBookRepository books, IAuthorRepository authors)
-    {
-        _books = books;
-        _authors = authors;
-    }
+    private readonly IBookRepository _books = books;
+    private readonly IAuthorRepository _authors = authors;
 
     public async Task<Result<PagedResult<BookDto>>> GetAllAsync(int page, int pageSize, string? search, CancellationToken ct = default)
     {

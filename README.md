@@ -93,3 +93,48 @@ dotnet test
 - `library-db.sql` is a portable dump of the seeded schema + data. The API also auto-creates/seeds
   `library-db.sqlite` on first run, so the SQL file is provided for reference/manual provisioning.
 - The JWT signing key in `appsettings.json` is a development placeholder — replace it for production.
+
+
+## Generative AI tools 
+
+This is the link to the TaskManagerAPI that was built by the prompt I share a bit down this section:
+
+https://github.com/andresospina0000/TaskManagerAPI
+
+[Swagger Project in case you wanna give it a try](https://web.postman.co/workspace/SpyCloud~fdb8d20b-2cc0-4e48-aa17-ed735e8a220a/collection/16776681-2a249fe7-566e-43c9-9e79-b75d84d51a17?action=share&source=copy-link&creator=16776681)
+
+Below is the Task Manager API prompt used to create it using GitHub copilot:
+
+```
+You are a .net Web Api developer expert.
+
+Write a RESTful Api that will be used for a task manager application. Below I described the specifications of how the api should be built.
+
+**.Net Specs**
+*On current folder, create a .net v8 solution.
+*Create a Clean Architecture scaffolding and associate created projects (web api and library csproj) to the created solution.
+*Apply the dependency injection principle.
+*Use matching EF Core version and use a sqlite connection so a nested/seeded .db file is stored on this solution.
+
+**REST Endpoints**
+*The api should expose CRUD endpoints to manage all Tasks that the users will create from the front end app.
+*The api should expose CRUD endpoints to manage all Users that want to manage their own Tasks.
+*Apply RESTful principles so understandable inputs/outputs, requests/responses are exposed by the api for better developer experience and integration purposes.
+*Inject dependencies as needed
+
+**Busines logic**
+*In the services/application layer implement basic implementation and inject EF Core dbcontext since this is a small backend implementation.
+*Use a standard response object so the api helps clients to identify if there was an error or if the request was successful.
+*Users: one existing User can CRUD its Tasks.
+
+
+**Middleware**
+*Implement an error/exception handling middleware that can log the errors, its description. This one will help the api to return specific HTTP errors accordingly.
+
+**Domain/Models**
+*Task: is the main entity in this api. It should have a title, a description and a due_date. Each task should have a primary key (guid) and must be linked to an existing User. One task should be linked to one user.
+*User: is the linked entity to a Task. A user should have an id (guid), full name and an email. One user can have several Tasks.
+
+**Unit Tests**
+*Write a Tests project that will code coverage all testable components. Cover all possible paths.
+```

@@ -4,11 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infrastructure.Persistence.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository(LibraryDbContext db) : IUserRepository
 {
-    private readonly LibraryDbContext _db;
-
-    public UserRepository(LibraryDbContext db) => _db = db;
+    private readonly LibraryDbContext _db = db;
 
     public async Task<User?> GetByEmailAsync(string email, CancellationToken ct = default) =>
         await _db.Users.FirstOrDefaultAsync(u => u.Email == email, ct);

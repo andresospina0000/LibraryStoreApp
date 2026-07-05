@@ -4,11 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infrastructure.Persistence.Repositories;
 
-public class BookRepository : IBookRepository
+public class BookRepository(LibraryDbContext db) : IBookRepository
 {
-    private readonly LibraryDbContext _db;
-
-    public BookRepository(LibraryDbContext db) => _db = db;
+    private readonly LibraryDbContext _db = db;
 
     public async Task<(IReadOnlyList<Book> Items, int TotalCount)> GetPagedAsync(
         int page, int pageSize, string? search, CancellationToken ct = default)

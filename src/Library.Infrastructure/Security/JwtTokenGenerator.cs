@@ -8,11 +8,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Library.Infrastructure.Security;
 
-public class JwtTokenGenerator : IJwtTokenGenerator
+public class JwtTokenGenerator(IOptions<JwtSettings> settings) : IJwtTokenGenerator
 {
-    private readonly JwtSettings _settings;
-
-    public JwtTokenGenerator(IOptions<JwtSettings> settings) => _settings = settings.Value;
+    private readonly JwtSettings _settings = settings.Value;
 
     public (string Token, DateTime ExpiresAtUtc) Generate(User user)
     {

@@ -5,7 +5,7 @@ namespace Library.Application.Common;
 /// </summary>
 public class PagedResult<T>
 {
-    public IReadOnlyList<T> Items { get; init; } = Array.Empty<T>();
+    public IReadOnlyList<T> Items { get; init; } = [];
 
     public int Page { get; init; }
 

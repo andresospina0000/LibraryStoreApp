@@ -5,11 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.API.Controllers;
 
-public class BooksController : ApiControllerBase
+public class BooksController(IBookService books) : ApiControllerBase
 {
-    private readonly IBookService _books;
-
-    public BooksController(IBookService books) => _books = books;
+    private readonly IBookService _books = books;
 
     /// <summary>Public: paginated, alphabetically-ordered list of books.</summary>
     [HttpGet]
